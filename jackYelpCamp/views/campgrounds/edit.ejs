@@ -1,0 +1,33 @@
+<!-- Copy process from new.ejs in terms of bootstrap form validations -->
+<% layout("layouts/boilerplate") %>
+<div class="row">
+    <div class="col-6 offset-3">
+        <h1>Editing information for <%= foundCamp.title %></h1>
+        <form action="http://localhost:3000/camp/<%= foundCamp.id %>?_method=PUT" class="needs-validation" method="post" novalidate>
+            <label class="form-label" for="campground[name]">Camp name: </label>
+            <input class="form-control" name="campground[name]" type="text" value="<%= foundCamp.title %>" required>
+            <div class="valid-feedback">That's a valid camp name</div>
+            <label class="form-label" for="campground[location]">Camp location: </label>
+            <input class="form-control" name="campground[location]" type="text" value="<%= foundCamp.location %>" required>
+            <div class="valid-feedback">That's a valid location</div>
+            <div class="mb-3">
+                <label class="form-label" for="floatingInputGroup1">Price: </label>
+                <div class="input-group">
+                    <span class="input-group-text" id="price-label">$</span>
+                    <input type="number" class="form-control" id="price" name="campground[price]" value="<%= foundCamp.price %>" required>
+                    <div class="invalid-feedback">Price needs to be greater than 0</div>
+                </div>
+              </div>
+            <label class="form-label" for="campground[description]">Description: </label>
+            <textarea class="form-control" name="campground[description]" required> <%= foundCamp.description %></textarea>
+            <div class="valid-feedback">Thanks for putting in a description</div>
+            <label class="form-label" for="campground[url]">Image URL: </label>
+            <input class="form-control" name="campground[url]" type="text" value="<%= foundCamp.image %>" required>
+            <div class="valid-feedback">That's a valid camp image URL</div>
+            <div class="d-grid gap-3">
+                <button class="btn btn-success col-4" type="submit">submit</button>
+                <button type="button" class="btn btn-info mt-8 col-4"><a href="/camp/<%= foundCamp.id %>">Back to details</a></button>
+            </div>
+        </form>
+    </div>
+</div>

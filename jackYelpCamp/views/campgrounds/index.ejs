@@ -1,0 +1,19 @@
+<!-- This basically imports the layout from boilerplate.ejs we dont need the headers -->
+<% layout("layouts/boilerplate") %>
+<h1>Camps</h1>
+<button><a href="http://localhost:3000/camp/new">Add new</a></button>
+<% for( let camp of camps) { %>
+    <div class="card">
+        <div class="row">
+            <div class="md-col-4">
+                <img class="img-fluid" src="<%=camp.image  %>">
+            </div>
+            <div class="md-col-8">
+                <h5><%= camp.title %></h5>
+                <p><%= camp.description %></p>
+                <p class="card-text"><%= camp.location %></p>
+                <button type="button" class="btn btn-primary bg-light"><a href="/camp/<%= camp.id %>">See more details</a></button>
+            </div>
+        </div>
+    </div>
+<% } %>

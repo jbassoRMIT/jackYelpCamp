@@ -1,0 +1,18 @@
+<% layout("layouts/boilerplate") %>
+<div class="row">
+    <div class="col-6 offset-3">
+        <h1>Register</h1>
+        <form action="http://localhost:3000/register" method="post" class="needs-validation" novalidate>
+            <label class="form-label" for="user[email]">Email: </label>
+            <input class="form-control" name="user[email]" type="email" required>
+            <div class="valid-feedback">That's a valid email</div>
+            <label class="form-label" for="user[username]">Username: </label>
+            <input class="form-control" name="user[username]" type="text" required>
+            <div class="valid-feedback">That's a valid username</div>
+            <label class="form-label" for="user[password]">Password: </label>
+            <input class="form-control" name="user[password]" type="password" required>
+            <div class="valid-feedback">Password matches requirements</div>
+            <button class="btn btn-success" type="submit">Register</button>
+        </form>
+    </div>
+</div>

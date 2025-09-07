@@ -1,0 +1,10 @@
+<!-- Creating a template to display error messages, for consistent looks -->
+<% layout("layouts/boilerplate") %>
+<div class="row">
+    <div class="row col-6 offset-3">
+        <div class="alert alert-danger" role="alert">
+            Error <%= status %>: <%= message %>
+            <p><%= error.stack %></p>
+        </div>
+    </div>
+</div>

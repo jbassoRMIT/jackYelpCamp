@@ -1,0 +1,99 @@
+<% layout("layouts/boilerplate") %>
+<link rel="stylesheet" type="text/css" href="/stylesheets/stars.css">
+<div class="row">
+  <div class="card col-6">
+      <% for( let image of foundCamp.images ) { %>
+        <img src="<%= image.url %>" class="card-img-top" alt="...">
+      <% } %>
+      <div class="card-body">
+          <div class="card-title fw-bold bg-info">
+              <%= foundCamp.title  %>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Submitted by: <%= foundCamp.author.username  %></li>  
+            <li class="list-group-item"><%= foundCamp.location  %></li>
+              <li class="list-group-item">$<%= foundCamp.price  %></li>
+              <li class="list-group-item"><%= foundCamp.description  %></li>
+              <!-- Only want to show the delete option if currentUser exists and currentUser=foundCamp.author -->
+              <li class="list-group-item">
+                  <% if (currentUser && currentUser.equals(foundCamp.author)) { %>
+                    <div class="d-grid gap-3">
+                        <form class="col-6" action="http://localhost:3000/camp/<%= foundCamp.id %>?_method=DELETE" method="post"">
+                          <button type="submit" class="btn btn-danger" >Delete</button>
+                        </form>
+                        <a href="/camp/<%= foundCamp.id %>/edit" class="btn btn-warning col-6">Edit</a>
+                    </div>
+                  <% } %>
+                <a href="/camp" class="btn btn-primary col-6">Back to home</a>
+              </li>
+          </ul>
+      </div>
+  </div>
+  <!-- We only want the user to see this if they are logged in, so basically if current user exists -->
+   <% if (currentUser) { %>
+    <div class="card col-6">
+      <h2>Leave a review</h2>
+      <form class="needs-validation" action="http://localhost:3000/camp/<%= foundCamp.id %>/reviews" method="post" novalidate>
+        <div class="mb-3">
+          <fieldset class="starability-basic">
+            <legend>Rating:</legend>
+            <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+            <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+            <label for="first-rate1" title="Terrible">1 star</label>
+            <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+            <label for="first-rate2" title="Not good">2 stars</label>
+            <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+            <label for="first-rate3" title="Average">3 stars</label>
+            <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+            <label for="first-rate4" title="Very good">4 stars</label>
+            <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+            <label for="first-rate5" title="Amazing">5 stars</label>
+          </fieldset>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="review[body]">Comments</label>
+          <textarea class="form-control mb-3" name="review[body]" id="body" required></textarea>
+          <div class="invalid-feedback">Needs a comment</div>
+          <button class="btn btn-success">Submit</button>
+        </div>
+      </form>
+        <div class="mb-3">
+          <h2>All reviews</h2>
+            <% for( let review of foundCamp.reviews) { %>
+              <div class="card mb-3">
+                <div class="card-body">
+                  <p class="starability-result" data-rating="<%= review.rating %>">
+                    Rated: <%= review.rating %>
+                  </p>
+                  <div class="card-text">
+                    <h5 class="card-title">By <%= review.author.username%></h5>
+                    <p>Review: <%= review.body %></p>
+                    <!-- Adding logic in to only display delete button if currently logged in user is the one who wrote the review -->
+                    <% if (currentUser && currentUser.equals(foundCamp.author)) { %>
+                      <form action="http://localhost:3000/camp/<%= foundCamp.id %>/reviews/<%= review.id %>?_method=DELETE" method="post">
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                      </form>
+                    <% } %> 
+                  </div>
+                </div>
+              </div>
+            <% } %>
+        </div>
+    </div>
+   <% } %>
+</div>
+<!-- 
+    </div>
+      <h5 class="card-title"><%= foundCamp.title  %></h5>
+      <p class="card-text"><%= foundCamp.description  %></p>
+      <div class="d-grid gap-3">
+          <form class="col-6" action="http://localhost:3000/camp/<%= foundCamp.id %>?_method=DELETE" method="post"">
+            <button type="submit" class="btn btn-danger" >Delete</button>
+          </form>
+          <a href="/camp" class="btn btn-primary col-6">Back to home</a>
+      </div>
+    </div>
+  </div> -->
+
+
+

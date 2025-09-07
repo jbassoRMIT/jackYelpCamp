@@ -1,0 +1,37 @@
+<!-- Process for form validation:
+ add "required" attribute to each input, and then counterintuitively, "novalidate" in form bracket, 
+ which allows bootstrap to take over -->
+<!-- provide a classname for the form "validated-class", and add in bootstrap js code in script -->
+<!-- Under each input can add a div with class="valid-feedback", to give some nice responsive text -->
+<% layout("layouts/boilerplate") %>
+<div class="row">
+    <div class="col-6 offset-3">
+        <h1>Add new campground</h1>
+        <form action="http://localhost:3000/camp" method="post" class="needs-validation" enctype="multipart/form-data" novalidate>
+            <label class="form-label" for="campground[name]">Camp name: </label>
+            <input class="form-control" name="campground[name]" type="text" required>
+            <div class="valid-feedback">That's a valid camp name</div>
+            <label class="form-label" for="campground[location]">Camp location: </label>
+            <input class="form-control" name="campground[location]" type="text" required>
+            <div class="valid-feedback">good job!</div>
+            <div class="mb-3">
+                <label class="form-label" for="floatingInputGroup1">Price: </label>
+                <div class="input-group">
+                    <span class="input-group-text" id="price-label">$</span>
+                    <input type="number" class="form-control" id="price" name="campground[price]" value="10" required>
+                    <div class="valid-feedback">good job!</div>
+                </div>
+              </div>
+            <label class="form-label" for="campground[description]">Description: </label>
+            <textarea class="form-control" name="campground[description]" required></textarea>
+            <div class="valid-feedback">good job!</div>
+            <!-- <label class="form-label" for="campground[url]">Image URL: </label>
+            <input class="form-control" name="campground[url]" type="text" required>
+            <div class="valid-feedback">good job!</div> -->
+            <label class="form-label" for="image">Upload file: </label><br>
+            <input type="file" name="image" id="image" multiple><br>
+            <button class="btn btn-success" type="submit">submit</button>
+        </form>
+    </div>
+</div>
+
